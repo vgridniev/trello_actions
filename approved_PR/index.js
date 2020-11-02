@@ -9,6 +9,7 @@ const supportedActions = ['submitted'];
 // const supportedEvent = 'pull_request';
 // const supportedActions = ['opened', 'reopened', 'edited'];
 
+
 //configured in workflow file, which in turn should use repo secrets settings
 const trelloKey = core.getInput('trello-key', { required: true });
 const trelloToken = core.getInput('trello-token', { required: true });
