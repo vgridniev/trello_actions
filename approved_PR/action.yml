@@ -1,0 +1,23 @@
+name: 'Approved PR move trello card'
+description: 'Add attachment to a given Trello card URL, to Attach Pull Request'
+inputs:
+  trello-key:
+    description: '(public) Trello auth key for account'
+    required: true
+  trello-token:
+    description: 'secret Trello auth token for account'
+    required: true
+  add-pr-comment:
+    description: 'should behave like Trello power-up and add (redundant) comment? (`true` to enable)'
+    required: false
+    default: false
+  repo-token:
+    description: 'required if `add-pr-comment` is enabled'
+    required: false
+    default: ''
+runs:
+  using: 'node12'
+  main: 'index.js'
+branding:
+  icon: 'paperclip'  
+  color: 'blue'
