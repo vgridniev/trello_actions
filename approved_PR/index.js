@@ -126,10 +126,12 @@ const extractTrelloCardIds = (prBody, stopOnNonLink = true) =>   {
               console.log("pullRequest ====>", pullRequest)
               console.log("pullRequest.data.mergeable ====>", pullRequest.data.mergeable)
 
-              if(pullRequest.data.mergeable){
+              if(pullRequest.data.mergeable && pullRequest.data.mergeable_state === 'unstable'){
                   mostCardInNewList(cardId,idNewList).then(() => {
                       core.info(`Move card to new list trello`);
                   })
+              } else {
+                  console.log("Status", pullRequest.data.mergeable_state)
               }
 
           };
