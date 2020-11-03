@@ -112,7 +112,7 @@ const extractTrelloCardIds = (prBody, stopOnNonLink = true) =>   {
       if(cardIds && cardIds.length > 0) {
           for(const cardId of cardIds) {
               const card= await getCard(cardId);
-              const idNewList = await getIdListByName('ready to deploy',card.idBoard);
+              const idNewList = await getIdListByName('ready to deploy ( until 13)',card.idBoard);
               const pullRequest  = await octokit.pulls.get({
                   owner: "oversecured",
                   repo: evthookPayload.pull_request.base.repo.name,
