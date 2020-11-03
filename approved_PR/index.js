@@ -113,20 +113,13 @@ const extractTrelloCardIds = (prBody, stopOnNonLink = true) =>   {
           for(const cardId of cardIds) {
               const card= await getCard(cardId);
               const idNewList = await getIdListByName('ready to deploy',card.idBoard);
-              // console.log("github.context ==>", github.context)
-              // console.log("Pull_request repo name",evthookPayload.pull_request.base.repo.name)
-              // console.log("Pull request number",evthookPayload.pull_request.number)
-
               const pullRequest  = await octokit.pulls.get({
                   owner: "oversecured",
                   repo: evthookPayload.pull_request.base.repo.name,
                   pull_number: evthookPayload.pull_request.number,
               });
-
               console.log("pullRequest ====>", pullRequest)
-              console.log("pullRequest.data.mergeable ====>", pullRequest.data.mergeable)
-
-              if(pullRequest.data.mergeable && pullRequest.data.mergeable_state === 'unstable'){
+              if(pullRequest.data.mergeable_state === 'unstable' || pullRequest.data.mergeable_state === 'clean'){
                   mostCardInNewList(cardId,idNewList).then(() => {
                       core.info(`Move card to new list trello`);
                   })
